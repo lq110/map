@@ -1,68 +1,99 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# React 疫情地图项目
+## 创建项目
+需要安装的包 使用 npm 或者 yarn
+ yarn add axios //请求用
+ yarn add echarts // 百度的echars 
+ yarn add echarts-for-react  //react的echars插件
+ yarn add  http-proxy-middleware  //配置跨域请求
+ yarn add antd // 阿里的react组件库 
+## 配置跨域
+在src文件夹下面建立setupProxy.js
+代码如下
+ const {createProxyMiddleware} = require('http-proxy-middleware')
 
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+module.exports = function(app) {
+  // proxy第一个参数为要代理的路由
+  // 第二参数中target为代理后的请求网址，changeOrigin是否改变请求头，其他参数请看官网
+  app.use(
+    createProxyMiddleware('/txapi/ncov', {
+      target: 'http://api.tianapi.com',
+      changeOrigin: true
+    })
+  )
+}
+## 文件目录 `
+src
+page //页面组件
+utils //工具项
+api // 请求
+hooks //钩子函数 `
+地图组件Map ReactECharts的参数
+options 决定图像是什么样子
+处理市级数据
+ function getProvinceData(provincename,list){
+     let mapList = [];
+	   const provenList= list.filter(item=>item.provinceShortName===provincename)
+		 	mapList = provenList[0].cities
+	    mapList= mapList.map(item=>{
+			console.log(item,'item')
+			return {
+			  name:`${item.cityName}市`,
+			  value:item.confirmedCount,
+				...item
+			}
+		})
+   return mapList
+}
+tab切换组件
+import { Tabs } from 'antd';
+const tabs = [{ title: '疫情地图' }, { title: '最新消息' }, { title: '辟谣信息' }, { title: '疫情趋势' }]
+// tab  导航标题 TabPane 里面放需要显示 的内容  
+function Navtap(){
+   return (
+     <Tabs defaultActiveKey="1" >
+       {tabs.map((item,index)=>{
+         return  <TabPane tab={`${item.title}`} key={index} >
+            {item.title}
+         </TabPane>
+       })}
+       </Tabs>
+  )
+}
+tabble组件
+// columns 表头   pagination 是否显示分页按钮 dataSource  数据源  rowKey 数据怎么来显示   expandedRowRender 表格展开显示 是一个函数 能拿到数据的每一项 
+import {Table } from 'antd';
+ const columns = [
+      { title: '地区', dataIndex: 'name', key: 'name' },
+      { title: '确诊', dataIndex: 'confirmedCount', key: 'confirmedCount' },
+      { title: '死亡', dataIndex: 'deadCount', key: 'deadCount' },
+      { title: '治愈', dataIndex: 'curedCount', key: 'curedCount' }
+    ]
+   <Table
+      columns={columns}
+      pagination={false}
+      expandedRowRender={(item) => expandedRowRender(item)}
+      dataSource={data}
+      rowKey={(record) => record.name}
+     />
+    //展开的表格显示的数据  
+  function expandedRowRender(item){
+  if(!item.cities)return 
+  let data =  item.cities.map((item)=>{
+    return {
+      name:item.cityName,
+      value:item.confirmedCount,
+      ...item
+    }
+   })
+  
+   return ( <Table
+          columns={columns}
+          showHeader={false}
+          rowKey={(record) => {
+             console.log(record)
+            return  record.cityName
+            }}
+          dataSource={data}
+          pagination={false}
+        />)
+}
