@@ -1,14 +1,21 @@
 # React 疫情地图项目
-## 创建项目
-需要安装的包 使用 npm 或者 yarn
+1. 创建项目
+2. 需要安装的包 使用 npm 或者 yarn
+
+```js
  yarn add axios //请求用
  yarn add echarts // 百度的echars 
  yarn add echarts-for-react  //react的echars插件
  yarn add  http-proxy-middleware  //配置跨域请求
  yarn add antd // 阿里的react组件库 
-## 配置跨域
-在src文件夹下面建立setupProxy.js
-代码如下
+```
+
+3. 配置跨域
+
+- 在src文件夹下面建立setupProxy.js 
+- 代码如下  
+
+```js
  const {createProxyMiddleware} = require('http-proxy-middleware')
 
 module.exports = function(app) {
@@ -21,15 +28,20 @@ module.exports = function(app) {
     })
   )
 }
-## 文件目录 `
-src
-page //页面组件
-utils //工具项
-api // 请求
-hooks //钩子函数 `
-地图组件Map ReactECharts的参数
-options 决定图像是什么样子
-处理市级数据
+```
+4. 文件目录
+`
+- src 
+  - page //页面组件 
+  - utils //工具项 
+  - api  // 请求
+  - hooks //钩子函数 
+`
+5. 地图组件Map 
+  ReactECharts的参数
+  1. options 决定图像是什么样子
+  2. 处理市级数据 
+```js
  function getProvinceData(provincename,list){
      let mapList = [];
 	   const provenList= list.filter(item=>item.provinceShortName===provincename)
@@ -44,7 +56,9 @@ options 决定图像是什么样子
 		})
    return mapList
 }
-tab切换组件
+```
+6. tab切换组件
+```js
 import { Tabs } from 'antd';
 const tabs = [{ title: '疫情地图' }, { title: '最新消息' }, { title: '辟谣信息' }, { title: '疫情趋势' }]
 // tab  导航标题 TabPane 里面放需要显示 的内容  
@@ -59,7 +73,10 @@ function Navtap(){
        </Tabs>
   )
 }
-tabble组件
+```
+
+6. tabble组件 
+```js 
 // columns 表头   pagination 是否显示分页按钮 dataSource  数据源  rowKey 数据怎么来显示   expandedRowRender 表格展开显示 是一个函数 能拿到数据的每一项 
 import {Table } from 'antd';
  const columns = [
@@ -96,4 +113,7 @@ import {Table } from 'antd';
           dataSource={data}
           pagination={false}
         />)
+}
+```
+
 }
