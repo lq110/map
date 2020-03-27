@@ -1,0 +1,109 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  background: #080808;
+  color: white;
+  text-align: center;
+}
+h2 {
+  margin-top: 122px;
+}
+.wrap {
+  width: 200px;
+  height: 200px;
+  border: 1px solid red;
+  margin: 20px auto;
+  position: relative;
+  perspective: 1000px; /*景深 图片到我们的距离*/
+}
+.main {
+  width: 100%;
+  height: 100%;
+  list-style: none;
+  position: absolute;
+  left: 0;
+  top: 0;
+
+  transform-style: preserve-3d; /*让子元素3D呈现*/
+  transition: all 2s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.main li {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.main img {
+  width: 200px;
+  height: 200px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.img_1 {
+  transform: translateZ(100px);
+}
+.img_2 {
+  transform: rotateY(90deg) translateZ(100px);
+}
+.img_3 {
+  transform: rotateY(-90deg) translateZ(100px);
+}
+.img_4 {
+  transform: rotateX(90deg) translateZ(100px);
+}
+.img_5 {
+  transform: rotateX(-90deg) translateZ(100px);
+}
+.img_6 {
+  transform: rotateY(180deg) translateZ(100px);
+}
+.main.view {
+  transform: rotateX(-20deg) rotateY(18deg) translateZ(150px);
+  /*让父级元素旋转一个角度*/
+}
+.img_but {
+  list-style: none;
+  display: grid;
+  /*grid布局宽度等于页面宽*/
+  grid-template-columns: 105px 105px 105px;
+  /*让子元素三列展示 分别设置它们的宽度 自己在所设宽度中居中*/
+  grid-template-rows: 103px 80px;
+  /*第一横行占得高和第二行占得高*/
+  justify-content: center;
+  /*让子元素在页面居中*/
+  grid-gap: 15px;
+  /*子元素之间左右上下的距离*/
+  margin: 20px auto;
+}
+.img_but input {
+  width: 100px;
+  height: 100px;
+  border: 3px solid white;
+}
+.img_but input {
+  width: 105px;
+  outline: none;
+  border: 2px solid #fafafa;
+}
+.main.but1 {
+  transform: translateZ(-100px);
+}
+.main.but2 {
+  transform: rotateY(-90deg) translateX(-100px);
+}
+.main.but3 {
+  transform: rotateY(90deg) translateX(100px);
+}
+.main.but4 {
+  transform: rotateX(-90deg) translateY(100px);
+}
+.main.but5 {
+  transform: rotateX(90deg) translateY(-100px);
+}
+.main.but6 {
+  transform: rotateY(-180deg) translateZ(100px);
+}

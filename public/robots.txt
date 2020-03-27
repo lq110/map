@@ -1,0 +1,4 @@
+# https://www.robotstxt.org/robotstxt.html
+# 给网络爬虫用的，它是一个爬虫协议，告诉爬虫你可以爬去我哪些内容
+User-agent: * # 告诉爬虫爬取所有东西
+Disallow:

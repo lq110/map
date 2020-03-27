@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>测试</title>
+  </head>
+  <body>
+    <div id="box">我是元素</div>
+    <script>
+      let div = window.box;
+      // 方法一
+      // div.style.background = "red";
+      // div.style.color = "white";
+
+      // 方法二 老师让用这种方式
+      // {"background":"red","color":"white"} react拿到的东西
+      let obj = { background: "red", color: "green" };
+      let str = "";
+      for (var key in obj) {
+        str += key + ":" + obj[key] + ";";
+      }
+      console.log(str);
+      // 把它转化成下面的格式即可
+      // 同理 用style.cssText 实现
+      div.style.cssText = str;
+    </script>
+  </body>
+</html>

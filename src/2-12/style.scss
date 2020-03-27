@@ -1,0 +1,17 @@
+/* 常规css书写，特别麻烦 */
+/* css预处理器：less styled scss，写css就像是写js一样舒服，快速，简单，干净 */
+/*
+在react中安装命令
+npm i -D sass-loader  node-sass
+注意：如果用yarn安装
+yarn config set sass-binary-site http://npm.taobao.org/mirrors/node-sass
+*/
+.header {
+  background: red;
+}
+.main {
+  background: blue;
+}
+.footer {
+  background: orange;
+}

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>css3魔方练习</title>
+    <link rel="stylesheet" type="text/css" href="./index.css" />
+  </head>
+
+  <body>
+    <div class="wrap">
+      <ul class="main view">
+        <li class="img_1"><img src="img/1.jpg" /></li>
+        <li class="img_2"><img src="img/2.jpg" /></li>
+        <li class="img_3"><img src="img/3.jpg" /></li>
+        <li class="img_4"><img src="img/4.jpg" /></li>
+        <li class="img_5"><img src="img/5.jpg" /></li>
+        <li class="img_6"><img src="img/6.jpg" /></li>
+      </ul>
+    </div>
+    <h2>阿强你导航请点击下方图片OK！~</h2>
+    <ul class="img_but">
+      <li><input type="image" src="img/1.jpg" class="but1" /></li>
+      <li><input type="image" src="img/2.jpg" class="but2" /></li>
+      <li><input type="image" src="img/3.jpg" class="but3" /></li>
+      <li><input type="image" src="img/4.jpg" class="but4" /></li>
+      <li><input type="image" src="img/5.jpg" class="but5" /></li>
+      <li><input type="image" src="img/6.jpg" class="but6" /></li>
+    </ul>
+    <script type="text/javascript">
+      // (function(){ // 立即执行函数是为了防止在开发中变量冲突
+
+      var img_but = document.getElementsByClassName("img_but")[0];
+      var main = document.getElementsByClassName("main")[0];
+      var main_Class = main.classList;
+      //获取main的className集合
+      var current_class = main_Class[1];
+      //获取main的className集合的第二个元素
+      var but_elem = img_but.children;
+      //获取所有按钮元素
+
+      for (var i = 0; i < but_elem.length; i++) {
+        but_elem[i].addEventListener("click", fun, false);
+      }
+      function fun(e) {
+        var target_class = e.target.className;
+        // console.log(click_img)
+
+        if (current_class != target_class) {
+          console.log(main_Class);
+          main_Class.replace(current_class, target_class);
+          current_class = target_class;
+          // main_Class2 = click_Class;
+        }
+        // if(main_Class!=)
+      }
+
+      // <!-- }()) -->
+    </script>
+  </body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>类</title>
+  </head>
+  <body>
+    <!-- 类 -->
+    <script>
+      // es6里的class
+      // 语法：class[关键字] 类名 花括号
+      // es6--class封装的原理就是我们下面
+      class Song {
+        // 类的使用和工厂函数几乎一样，就是样子
+        // 这样写就相当于是写在prototype上的
+        // constructor 是class类里自带的构造函数
+        // 它是就是在使用class类进行实例化的时候【new】第一个调用的函数
+        // 如果我们写class的时候不写constructor，那么它也会自动生成一个构造函数去调用
+        constructor(name) {
+          // 记得在constructor里写属性或方法一定要加this
+          this.name = name;
+        }
+        name = "";
+        getUser() {
+          return "宋宇老师";
+        }
+        // class类中有一些内置的函数和关键字
+        // static 静态声明
+        // get(){} set(){}
+      }
+      //  使用--new 实例化一个对象
+      var s = new Song("强");
+      console.log(s);
+      // 在没有es6-class的时候我们用的都是工厂函数
+      // 起到复用
+      // 前端里的类实际上不太标准，严格上来说，继承上是子类继承父类，而前端里的类父类也可以获取到子类的属性和方法，prototype 原型对象的查找
+
+      // 工厂函数
+      function Qing(name) {
+        this.name = name;
+      }
+      // 工厂函数的使用
+      // new这个步骤叫做---实例化，得到一个对象
+      // let qing = new Qing("李强");
+      // console.log(qing);
+      // let s = new Qing("小张");
+      // console.log(s);
+    </script>
+  </body>
+</html>

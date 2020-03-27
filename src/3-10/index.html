@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+
+    <style>
+      #btn {
+        width: 200px;
+        height: 40px;
+        border-radius: 10px;
+        outline: none;
+      }
+    </style>
+  </head>
+  <body>
+    <button id="btn">点我</button>
+    <!-- <script>
+      let btn = document.getElementById("btn");
+      btn.addEventListener("click", throttle(fn, 2000), false);
+      function throttle(fn, wait) {
+        let previous = Date.now();
+        let that = this;
+        return () => {
+          let now = Date.now();
+          if (now - previous > 2000) {
+            fn.apply(that, arguments);
+            previous = now;
+          }
+        };
+      }
+      function fn() {
+        console.log(this);
+      }
+    </script> -->
+    <!-- <script src="./debonse.js"></script> -->
+    <script src="./throttle.js"></script>
+  </body>
+</html>

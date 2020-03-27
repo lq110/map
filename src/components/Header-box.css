@@ -1,0 +1,6 @@
+.header-box {
+  background: red;
+}
+
+/* react中使用scss预处理器去写样式，也能在很大程度上解决掉样式作用域的 */
+/* jsincss moudule.css */
