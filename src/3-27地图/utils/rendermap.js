@@ -7,12 +7,15 @@ const renderMap = (
     tooltip: {
       // 提示框
       show: true,
-      triggerOn: "click",
+      // triggerOn: "click",
       // formatter: "省份：{b} <br/> 累计确诊：{c}"  // a 系列名称 b name c value 写法一
       formatter: function(e, t, n) {
-        console.log(e.name);
-        console.log(e.value);
-        return `省份: ${e.name}<br/> 累计确诊：${e.value}`;
+        // console.log(e);
+        // console.log(e.name);
+        // console.log(e.value);
+        return `${province == "china" ? "省份" : "地区"}: ${
+          e.name
+        }<br/> 累计确诊：${e.value || 0}`;
       }
     },
     visualMap: {
