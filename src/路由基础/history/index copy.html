@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>history</title>
+  </head>
+  <body>
+    <a onclick="goTo('/a.html')">跳转到a页面</a>
+    <a onclick="goTo('/b.html')">跳转到b页面</a>
+    <!-- <button onclick="goToa()">点击去a页面</button> -->
+    <div id="container"></div>
+    <script>
+      // 单页应用路由原理  history路由原理
+      // replaceState 和pushState的不同点replacestate修改是没有历史记录的 所以浏览器的前进后退按钮失效
+      function goTo(page) {
+        // history.replaceState({}, null, "a.html"); // 替换当前页面 不会产生记录
+        history.pushState({}, null, page); // 页面不刷新 但是可以改变url  我们就可以根据改变的url地址决定显示什么内容
+        container.innerHTML = `这是${page}`;
+      }
+
+      // 当点前进包括后退按钮时我们需要知道url地址是谁  (只在浏览器前进后退行为下触发)
+      window.addEventListener("popstate", function() {
+        // console.log(location.href);
+        console.log(location.pathname);
+        container.innerHTML = `这是${location.pathname}页面`;
+      });
+
+      // // 点击去a页面
+      // function goToa() {
+
+      //   history.go(-1); // 后退一个页面
+      //   history.back() // 后退一个页面
+      //   history.forward(); // 前进一个页面
+
+      // }
+    </script>
+  </body>
+</html>

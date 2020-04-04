@@ -5,6 +5,6 @@ import React, { useEffect, useState } from "react";
 // 3.不填array这个数组，useEffect每次都会执行
 // rfce 自动生成函数组件默认导出快捷键
 import { render } from "react-dom";
-import App from "./3-27地图/index";
+import App from "./路由基础/index";
 
 render(<App />, window.root);
